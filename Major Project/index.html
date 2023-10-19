@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <style>
+        /* Add your CSS styles here */
+        /* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Menu Styles */
+#menu {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.menu-item h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.menu-item p {
+    margin: 0;
+    color: #777;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* Cart Styles */
+#cart {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* Reviews Styles */
+#reviews {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.review {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.review h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.review p {
+    margin: 0;
+    color: #777;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    #menu, #cart, #reviews {
+        padding: 10px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Restaurant Name</h1>
+        <p>Welcome to our restaurant</p>
+    </header>
+
+    <section id="menu">
+        <h2>Menu</h2>
+        <div class="menu-item">
+            <h3>Dish 1</h3>
+            <p>Description of Dish 1</p>
+            <p>Price: $10</p>
+            <button onclick="addToCart('Dish 1', 10)">Add to Cart</button>
+        </div>
+        <div class="menu-item">
+            <h3>Dish 2</h3>
+            <p>Description of Dish 2</p>
+            <p>Price: $12</p>
+            <button onclick="addToCart('Dish 2', 12)">Add to Cart</button>
+        </div>
+        <!-- Add more menu items here -->
+    </section>
+
+    <section id="cart">
+        <h2>Cart</h2>
+        <ul id="cart-items">
+            <!-- Cart items will be displayed here -->
+        </ul>
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <button onclick="placeOrder()">Place Order</button>
+    </section>
+
+    <section id="reviews">
+        <h2>Customer Reviews</h2>
+        <div class="review">
+            <h3>Customer 1</h3>
+            <p>Rating: 4/5</p>
+            <p>Review: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div class="review">
+            <h3>Customer 2</h3>
+            <p>Rating: 5/5</p>
+            <p>Review: Nullam nec libero quis lectus cursus hendrerit.</p>
+        </div>
+        <!-- Add more reviews here -->
+    </section>
+
+    <script>
+        // JavaScript functions for adding to cart and placing orders
+        let cart = [];
+        let total = 0;
+
+        function addToCart(itemName, itemPrice) {
+            cart.push({ name: itemName, price: itemPrice });
+            total += itemPrice;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - $${item.price}`;
+                cartItems.appendChild(li);
+            });
+            cartTotal.textContent = total.toFixed(2);
+        }
+
+        function placeOrder() {
+            alert(`Order placed! Total amount: $${total.toFixed(2)}`);
+            cart = [];
+            total = 0;
+            updateCart();
+        }
+    </script>
+</body>
+</html>
